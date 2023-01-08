@@ -1,0 +1,26 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1> Question number <%= it.question.id %> </h1>
+
+  <p> <%= it.question.question_text %> </p>
+
+    <h2> List of questions for the topic. Select the correct one </h2>
+
+    <% if (it.answerOptions && it.answerOptions.length > 0) { %>
+
+    <ul>
+    <% it.answerOptions.forEach(option => { %>
+      <li> 
+        <p> <%= option.option_text %> </p>
+        <form method="POST" action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= option.id %>">
+          <input type="submit" value="Choose"/>
+        </form>
+      </li>
+    <% }); %>
+    </ul>
+
+    <% } else { %>
+
+    <p>No answer options for this question available</p>
+
+    <% } %>

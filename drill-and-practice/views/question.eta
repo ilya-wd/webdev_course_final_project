@@ -1,0 +1,53 @@
+<% layout("./layouts/layout.eta") %>
+
+<p> <a href="/topics"> Topics </a> </p>
+
+<h1> Question number <%= it.question.id %> </h1>
+
+  <p> <%= it.question.question_text %> </p>
+
+  <h2> Add answer options to the question </h2>
+
+        <% if (it.validationErrors) { %>
+        <ul>
+            <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+                <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+                    <li><%= err %></li>
+                <% }); %>
+            <% }); %>
+        </ul>
+      <% } %>
+
+    <form method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
+    Write the answer option here:<br/>
+    <input type="textarea" name="option_text" value="<%= it.option_text ? it.option_text : "" %>"/><br/>
+    Is this answer option correct? <br/>
+    <input type="checkbox" name="is_correct" <%= it.is_correct ? checked : "" %> />
+    <input type="submit" value="Add an option"/>
+    </form>
+
+  <h2> List of questions for the topic </h2>
+
+    <% if (it.answerOptions && it.answerOptions.length > 0) { %>
+
+    <ul>
+    <% it.answerOptions.forEach(option => { %>
+      <li> 
+        <p> <%= option.option_text %> </p>
+        <p> <%= option.is_correct ? "Correct" : "Incorrect" %> </p> 
+        <form method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= option.id %>/delete">
+          <input type="submit" value="Delete option"/>
+        </form>
+      </li>
+    <% }); %>
+    </ul>
+
+    <% } else { %>
+
+    <p>No answer options for this question available. You can delete the question</p>
+
+    <form method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/delete">
+      <input type="submit" value="Delete question"/>
+    </form>
+
+    <% } %>

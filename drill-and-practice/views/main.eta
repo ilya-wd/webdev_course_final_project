@@ -1,0 +1,19 @@
+<% layout("./layouts/layout.eta") %>
+
+  <h1>Hello world!</h1>
+    <p> In this quiz app you can test your knowledge, challenge the wit of your friends and colleagues, or just use it as a learning tool </p>
+    <br/>
+    <p>PRO TIP: if you want to see how it feels to be the Admin, you can log in using admin@admin.com as email and 1234 as password. Please, clean the app after yourself! </p>
+    <br/>
+    <p> To be more exact, you can: create quizzes, answer quizzes, create topics for quizzes if you've been granted admin rights, and check the statistics of the app. </p>
+    <br/>
+    <p> Alternatively, the app provides a simple API that fetches random questions with option answers as a response to GET request to "/api/questions/random". A user can answer the question with a POST request to "/api/questions/answer" containing a JSON doc in the following format: <br/> { <br/> "questionId": 1,<br/> "optionId": 3, <br/>} </p>
+
+    <h2> Application statistics: </h2>
+    <p> Total topics: <%= it.stats.topics %> </p>
+    <p> Total questions: <%= it.stats.questions %> </p>
+    <p> Total user answers: <%= it.stats.answers %> </p>
+
+      <h3> <a href="/auth/register"> If you want to use the app, you need to sign up here </a> </h3>
+
+      <h3> <a href="/auth/login"> If you've already registered, you can log in here </a> </h3>
