@@ -1,7 +1,7 @@
 # Project 2: Online quiz app
 
 
-Online address: https://quiz-app-heroku1.herokuapp.com/
+Online address: https://quiz-app-heroku1.herokuapp.com/ (outdated, as Heroku discontinued free plans)
 
 How to run locally: write "docker-compose up" in terminal while in the parent folder of the application which contains docker-compose.yml, project.env files and flyway folder. You'll need docker installed on you computer.
 
